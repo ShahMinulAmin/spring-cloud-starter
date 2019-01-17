@@ -12,6 +12,7 @@
         <module>eureka-server</module>
         <module>animal-service</module>
         <module>config-server</module>
+        <module>zipkin-server</module>
     </modules>
 
 
