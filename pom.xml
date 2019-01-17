@@ -13,6 +13,7 @@
         <module>animal-service</module>
         <module>config-server</module>
         <module>zipkin-server</module>
+        <module>gatewayservice</module>
     </modules>
 
 
