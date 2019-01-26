@@ -66,6 +66,12 @@
             <artifactId>spring-cloud-starter-zuul</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -99,6 +105,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

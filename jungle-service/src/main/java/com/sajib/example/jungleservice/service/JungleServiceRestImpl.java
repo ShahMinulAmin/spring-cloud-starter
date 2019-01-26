@@ -15,19 +15,19 @@ import java.util.logging.Logger;
 public class JungleServiceRestImpl implements JungleService {
     private static final Logger LOG = Logger.getLogger(JungleServiceRestImpl.class.getName());
 
-    private AnimalServiceClient animalServiceClient;
-    private BirdServiceClient birdServiceClient;
+    private AnimalServiceRestClient animalServiceRestClient;
+    private BirdServiceRestClient birdServiceRestClient;
 
-    public JungleServiceRestImpl(AnimalServiceClient animalServiceClient, BirdServiceClient birdServiceClient) {
-        this.animalServiceClient = animalServiceClient;
-        this.birdServiceClient = birdServiceClient;
+    public JungleServiceRestImpl(AnimalServiceRestClient animalServiceRestClient, BirdServiceRestClient birdServiceRestClient) {
+        this.animalServiceRestClient = animalServiceRestClient;
+        this.birdServiceRestClient = birdServiceRestClient;
     }
 
     @Override
     public JungleResponse getAllSpecies() {
-        List<AnimalDTO> animalDTOList = animalServiceClient.getAllAnimalsResponse();
+        List<AnimalDTO> animalDTOList = animalServiceRestClient.getAllAnimalsResponse();
         LOG.info("animalDTOList: " + animalDTOList);
-        List<BirdDTO> birdDTOList = birdServiceClient.getAllBirdsResponse();
+        List<BirdDTO> birdDTOList = birdServiceRestClient.getAllBirdsResponse();
         LOG.info("birdDTOList: " + birdDTOList);
 
         JungleResponse jungleResponse = new JungleResponse();

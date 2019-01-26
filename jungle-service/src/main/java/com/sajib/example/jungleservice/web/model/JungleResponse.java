@@ -9,6 +9,6 @@ import java.util.List;
  */
 @Data
 public class JungleResponse {
-    private List<AnimalResponse> animalResponseList;
-    private List<BirdResponse> birdResponseList;
+    private List<AnimalDTO> animalDTOList;
+    private List<BirdDTO> birdDTOList;
 }

@@ -15,6 +15,7 @@
         <module>zipkin-server</module>
         <module>gatewayservice</module>
         <module>bird-service</module>
+        <module>jungle-service</module>
     </modules>
 
 
