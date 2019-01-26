@@ -1,9 +1,12 @@
 package com.sajib.example.jungleservice.service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.sajib.example.jungleservice.web.model.AnimalDTO;
 import com.sajib.example.jungleservice.web.model.BirdDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +22,12 @@ public class BirdServiceRestClient {
         this.restTemplate = restTemplate;
     }
 
+    @HystrixCommand(fallbackMethod = "getDefaultAllBirdsResponse")
     public List<BirdDTO> getAllBirdsResponse() {
         return restTemplate.getForObject(BIRD_SERVICE_URL, List.class);
+    }
+
+    public List<BirdDTO> getDefaultAllBirdsResponse() {
+        return new ArrayList<>();
     }
 }
