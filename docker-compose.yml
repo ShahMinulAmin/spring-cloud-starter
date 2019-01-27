@@ -1,0 +1,104 @@
+version: '2.1'
+services:
+  eurekaserver:
+    container_name: eurekaserver
+    build: eureka-server
+    mem_limit: 512M
+    ports:
+      - "8761:8761"
+    networks:
+      - samplenet
+
+  configservice:
+    container_name: configservice
+    build: config-server
+    mem_limit: 512M
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eurekaserver
+    networks:
+      - samplenet
+
+  zipkin-server:
+    container_name: zipkin-server
+    build: zipkin-server
+    mem_limit: 512M
+    ports:
+      - "9411:9411"
+    depends_on:
+      - configservice
+    networks:
+      - samplenet
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      while ! (nc -z configservice 8888); do sleep 5; echo 'Waiting for configservice to start-up...'; done;
+      java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n -jar -Dspring.profiles.active=docker /app.jar
+      "
+
+  gatewayservice:
+    container_name: gatewayservice
+    build: gatewayservice
+    mem_limit: 512M
+    ports:
+      - "9999:9999"
+    depends_on:
+      - eurekaserver
+    networks:
+      - samplenet
+
+  animal-service:
+    container_name: animal-service
+    build: animal-service
+    mem_limit: 512M
+    ports:
+      - "9090:9090"
+    depends_on:
+      - configservice
+    networks:
+      - samplenet
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      while ! (nc -z configservice 8888); do sleep 5; echo 'Waiting for configservice to start-up...'; done;
+      java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n -jar -Dspring.profiles.active=docker /app.jar
+      "
+
+  bird-service:
+    container_name: bird-service
+    build: bird-service
+    mem_limit: 512M
+    ports:
+      - "7070:7070"
+    depends_on:
+      - configservice
+    networks:
+      - samplenet
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      while ! (nc -z configservice 8888); do sleep 5; echo 'Waiting for configservice to start-up...'; done;
+      java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n -jar -Dspring.profiles.active=docker /app.jar
+      "
+
+  jungle-service:
+    container_name: jungle-service
+    build: jungle-service
+    mem_limit: 512M
+    ports:
+      - "8080:8080"
+    depends_on:
+      - configservice
+    networks:
+      - samplenet
+    entrypoint: /bin/sh
+    command: >
+      -c "
+      while ! (nc -z configservice 8888); do sleep 5; echo 'Waiting for configservice to start-up...'; done;
+      java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n -jar -Dspring.profiles.active=docker /app.jar
+      "
+
+networks:
+  samplenet:
+    driver: bridge

@@ -10,13 +10,12 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>eureka-server</module>
-        <module>animal-service</module>
         <module>config-server</module>
         <module>zipkin-server</module>
         <module>gatewayservice</module>
+        <module>animal-service</module>
         <module>bird-service</module>
         <module>jungle-service</module>
     </modules>
-
 
 </project>
