@@ -18,3 +18,41 @@ At first build all the modules. From the root of the project, execute the follow
 We can deploy and start all the modules in docker by using the following command:
 
 `$ docker-compose up --build --force-recreate`
+
+* eureka-server
+  * hostname: eurekaserver
+  * Ports: 8761:8761
+  * URL: http://localhost:8761/  
+
+* configserver
+  * hostname: configservice
+  * Ports: 8888:8888
+  * URL: http://localhost:8888/jungle-service/default
+
+* zipkin-server
+  * hostname: zipkin-server
+  * Ports: 9411:9411
+  * URL: http://localhost:9411/zipkin/
+  
+* gatewayservice
+  * hostname: gatewayservice
+  * Ports: 9999:9999
+  * URL: http://localhost:9999/api/jungle-service
+  * Username: sajib 
+  * Password: password
+  
+* animal-service
+  * hostname: animal-service
+  * Ports: 9090:9090
+  * URL: http://localhost:9090/
+
+* bird-service
+  * hostname: bird-service
+  * Ports: 7070:7070
+  * URL: http://localhost:7070/
+  
+* jungle-service
+  * hostname: jungle-service
+  * Ports: 8080:8080
+  * URL: http://localhost:8080/
+  
